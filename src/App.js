@@ -20,21 +20,27 @@ class App extends Component {
     console.log(e.target.value);
   }
 
+  onClickEdit = (id) => {
+    console.log(id)
+  }
+
   render() {
     return (
       <div className="row">
-        <div class="column column-75">
+        <div className="column column-75">
           <SearchBar
             onSearchClick={this.onSearchClick}
             onSearchInputChange={this.onSearchInputChange}
+            onClickEdit={this.onClickEdit}
           />
           <div>
             <CustomerTable
               data={DATA}
+              onClickEdit={this.onClickEdit}
             />
           </div>
         </div>
-        <div class="column-25">something else</div>
+        <div className="column-25">something else</div>
       </div>
     );
   }
