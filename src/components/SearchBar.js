@@ -32,14 +32,16 @@ const SearchIcon = styled.a`
 `
 
 const SearchBar = ({
-    onSearchClick,
-    onSearchInputChange
+    searchTerm,
+    onSearchInputChange,
+    onSearchClick
 }) => {
     return (
-        <div>
+        <form onSubmit={onSearchClick}>
             <span>Search</span>
             <SearchInputDiv>
                 <input
+                    value={searchTerm}
                     type="text"
                     placeholder="Start typing..."
                     id=""
@@ -49,7 +51,7 @@ const SearchBar = ({
             <SearchIcon
                 onClick={onSearchClick}
             />
-        </div>
+        </form>
     );
 }
 
