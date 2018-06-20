@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar';
 import CustomerTable from './components/CustomerTable';
 import EditForm from './components/EditForm';
 import ErrorMsg from './components/ErrorMsg';
+import Sticky from './components/Sticky';
 
 class App extends Component {
   constructor(props) {
@@ -182,6 +183,9 @@ class App extends Component {
               />
             </div>
           }
+        </div>
+        <div>
+          <Sticky/>
         </div>
       </div>
     );

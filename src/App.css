@@ -151,3 +151,25 @@
      }
  }
  
+
+ /*Sticky css*/
+.sticky-layout {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+
+.sticky-layout__header {
+    background: #606c76;
+    color: #ffffff;
+}
+
+.sticky-layout__content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sticky-layout__footer {
+    background: #606c76;
+    color: #ffffff;
+}
