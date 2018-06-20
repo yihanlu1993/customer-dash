@@ -82,7 +82,13 @@ class App extends Component {
   onClickEdit = (id) => {
     const { customers } = this.state;
     if(id === this.state.activeEditIndex) {
-      this.setState({activeEditIndex: -1});
+      this.setState({
+        activeEditIndex: -1,
+        error: {
+          name: false,
+          email: false
+        }
+      });
     } else {
       const {name, email} = customers.find((a)=> (a.id === id));
       this.setState({
@@ -99,14 +105,14 @@ class App extends Component {
     const { activeEditObject } = this.state;
     e.preventDefault();
     //save value
-    this.setState({activeEditIndex: -1})
     customer.saveCustomer(id, activeEditObject)
-    .then(()=>{
+    .then((res)=>{
+      this.setState({activeEditIndex: -1})
       this.filterCustomer()
     })
     .catch((err)=>{
       this.setState({
-        apiError: err.message
+        apiError: err.response.data.message
       })
     })
   }
@@ -180,6 +186,7 @@ class App extends Component {
                 onEmailChange={this.onEmailChange}
                 onClickSave={this.onClickSave}
                 error={error}
+                apiError={apiError}
               />
             </div>
           }

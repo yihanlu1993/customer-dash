@@ -22,7 +22,7 @@ const EditFromInput = styled.input`
 `
 
 const ButtonDiv = styled.div`
-    height: 4rem;
+    min-height: 4rem;
 `
 
 const EditForm = ({
@@ -32,7 +32,8 @@ const EditForm = ({
     onClickSave,
     name,
     email,
-    error
+    error,
+    apiError
 }) => {
     return (
         <EditFormContainer>
@@ -48,6 +49,7 @@ const EditForm = ({
                     {error && error.email && <ErrorMsg>{error.email}</ErrorMsg>}
                 </fieldset>
                 <ButtonDiv>
+                    {apiError  && <ErrorMsg>{apiError}</ErrorMsg>}
                     <SaveButton
                         disabled={(error && error.email) || (error && error.name)}
                         onClick={(e)=>onClickSave(e,id)}
