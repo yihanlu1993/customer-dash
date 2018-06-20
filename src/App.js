@@ -31,7 +31,7 @@ class App extends Component {
     }
   }
 
-  componentWillMount = () => {
+  componentWillMount() {
     this.fetchAllCustomer()
   }
 
