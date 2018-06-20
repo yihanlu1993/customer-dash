@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CustomerTable = ({
     data,
-    editClick,
     onClickEdit
 }) => {
     return (
@@ -17,7 +17,7 @@ const CustomerTable = ({
             </thead>
             <tbody>
                 {
-                    data.map(
+                    data && data.map(
                         (a, i) => (
                             <tr key={i}>
                                 <td>{a.id}</td>
@@ -43,5 +43,9 @@ const CustomerTable = ({
         </table>
     )
 }
+CustomerTable.propTypes = {
+    data: PropTypes.array,
+    onClickEdit: PropTypes.func.isRequired
+};
 
 export default CustomerTable;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const SearchInputDiv = styled.div`
     width: 20rem;
@@ -53,6 +54,12 @@ const SearchBar = ({
             />
         </form>
     );
+}
+
+SearchBar.propTypes = {
+    searchTerm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onSearchInputChange: PropTypes.func.isRequired,
+    onSearchClick: PropTypes.func.isRequired
 }
 
 export default SearchBar;

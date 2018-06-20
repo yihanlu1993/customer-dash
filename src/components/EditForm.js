@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ErrorMsg from './ErrorMsg';
 
@@ -41,20 +42,29 @@ const EditForm = ({
                     <p>{id}</p>
                     <label>Name</label>
                     <EditFromInput value={name} type="text" placeholder="" id="nameField" onChange={onNameChange}/>
-                    {error.name && <ErrorMsg>{error.name}</ErrorMsg>}
+                    {error && error.name && <ErrorMsg>{error && error.name}</ErrorMsg>}
                     <label>Email</label>
                     <EditFromInput value={email} type="text" placeholder="" id="emailField" onChange={onEmailChange}/>
-                    {error.email && <ErrorMsg>{error.email}</ErrorMsg>}
+                    {error && error.email && <ErrorMsg>{error.email}</ErrorMsg>}
                 </fieldset>
                 <ButtonDiv>
                     <SaveButton
-                        disabled={error.email || error.name}
+                        disabled={(error && error.email) || (error && error.name)}
                         onClick={(e)=>onClickSave(e,id)}
                     >Save</SaveButton>
                 </ButtonDiv>
             </form>
         </EditFormContainer>
     )
+}
+EditForm.propTypes = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    onNameChange: PropTypes.func.isRequired,
+    onEmailChange: PropTypes.func.isRequired,
+    onClickSave: PropTypes.func.isRequired,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    error: PropTypes.object
 }
 
 export default EditForm;
