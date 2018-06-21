@@ -8,6 +8,7 @@ import EditForm from './components/EditForm';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
+import customer from './utils';
 
 const DATA = [
   { "id": 1, "name": "James Bond", "email": "james@bond.com" },
@@ -102,27 +103,40 @@ describe('render SearchBar', () => {
 });
 
 describe('render Main app', () => {
-  it('mount without customer table', () => {
-    const wrapper = mount((
+  let customersResolover, wrapper;
+  const qCustomers = Promise.resolve(DATA);
+  beforeEach(() => {
+    customer.getAll = jest.fn()
+    .mockReturnValue(qCustomers);
+
+    wrapper = mount((
       <App/>
     ));
-    expect(wrapper.find(CustomerTable)).toHaveLength(0);
-  })
-  it('click on first edit button to open edit form', () => {
-    const wrapper = mount((
-      <App/>
-    ));
-    wrapper.setState({customers: DATA, loading: false});
-    wrapper.find('button').first().simulate('click');
-    expect(wrapper.find(EditForm)).toHaveLength(1);
-  })
-  it('double click on first edit button to close edit form', () => {
-    const wrapper = mount((
-      <App/>
-    ));
-    wrapper.setState({customers: DATA, loading: false});
-    wrapper.find('button').first().simulate('click');
-    wrapper.find('button').first().simulate('click');
-    expect(wrapper.find(EditForm)).toHaveLength(0);
+  });
+  describe('when customers is resolved', () => {
+    // beforeEach(() => {
+    //   customersResolover(customers);
+    // });
+    it('should pass', () => {
+      expect(wrapper.state().customers).toBe(DATA);
+    })
+
+    it('mount without customer table', () => {
+      expect(wrapper.find(CustomerTable)).toHaveLength(0);
+    })
+  
+    it('click on first edit button to open edit form', () => {
+      wrapper.setState({loading: false});
+      wrapper.find('button').first().simulate('click');
+      expect(wrapper.find(EditForm)).toHaveLength(1);
+    })
+  
+    it('double click on first edit button to close edit form', () => {
+
+      wrapper.setState({loading: false});
+      wrapper.find('button').first().simulate('click');
+      wrapper.find('button').first().simulate('click');
+      expect(wrapper.find(EditForm)).toHaveLength(0);
+    })
   })
 });

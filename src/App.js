@@ -10,8 +10,8 @@ import ErrorMsg from './components/ErrorMsg';
 import Sticky from './components/Sticky';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       activeEditIndex: -1,
       customers: [],
@@ -32,11 +32,11 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.fetchAllCustomer()
+    this.fetchAllCustomer();
   }
 
   fetchAllCustomer = () => {
-    this.setState({loading: true})
+    this.setState({loading: true});
     customer.getAll()
     .then((customers)=>{
       this.setState({
